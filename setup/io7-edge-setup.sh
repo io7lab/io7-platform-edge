@@ -14,13 +14,6 @@ echo Enter the gateway id && read client_id
 echo Enter the gateway password && read client_pw
 
 dir=$(dirname $(echo $0))
-docker build $dir -t mynode
-branch=""
-if [ "$1" != "" ]
-then
-    branch="-b $1"
-fi
-
 
 cp $dir/../docker-compose.yml ~
 cp -R $dir/../data ~/
