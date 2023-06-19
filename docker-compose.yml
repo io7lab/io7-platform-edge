@@ -1,0 +1,41 @@
+version: '3'
+services:
+  mqtt:
+    container_name: mqtt
+    image: eclipse-mosquitto
+    volumes:
+      - ./data/mosquitto:/mosquitto
+    ports:
+      - "1883:1883"
+    restart: always
+  nodered:
+    container_name: nodered
+    image: nodered/node-red
+    environment:
+      - TZ=Asia/Seoul
+    volumes:
+      - ./data/nodered:/data
+    ports:
+      - "1880:1880"
+    links:
+      - redis
+      - mqtt
+    restart: always
+  redis:
+    container_name: redis
+    image: redis
+    environment:
+      - TZ=Asia/Seoul
+    volumes:
+      - ./data/redis:/data
+    ports:
+      - "127.0.0.1:6379:6379"
+    restart: always
+  io7edge:
+    container_name: io7edge
+    image: io7lab/io7-edge
+    volumes:
+      - ./data/gateway/config.json:/home/node/app/config.json
+    links:
+      - mqtt
+    restart: always

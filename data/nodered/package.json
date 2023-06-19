@@ -1,0 +1,10 @@
+{
+    "name": "node-red-project",
+    "description": "A Node-RED Project",
+    "version": "0.0.1",
+    "private": true,
+    "dependencies": {
+        "mqtt": "^4.3.7",
+        "redis": "^4.5.1"
+    }
+}
