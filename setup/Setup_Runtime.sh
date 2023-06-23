@@ -21,7 +21,7 @@ else
 fi
 
 echo "nodejs will be installed for the link =>"
-echo "        https://nodejs.org/dist/v18.16.0/node-v18.16.0-linux-arm64.tar.xz"
+echo "        " $nodejs_url
 echo "if you you want to install a different version or the latest if any"
 echo "then visit https://nodejs.org/en/download/ and get the link to the nodejs tarball"
 echo "paste the link here, otherwise just hit enter"
