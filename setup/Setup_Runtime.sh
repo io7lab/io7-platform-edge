@@ -33,7 +33,7 @@ then
 fi
 
 fname=$(echo $url|awk -F'/' '{ print $NF }')
-rm $fname
+test -f $fname && rm $fname
 wget $url
 if [ $? -eq 0 ] 
 then
