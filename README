@@ -1,1 +1,5 @@
 This is the io7 platform edge server repository
+
+
+## How to build
+docker buildx build --platform=linux/arm64/v8,linux/amd64 . -t io7lab/io7-edge  --push
