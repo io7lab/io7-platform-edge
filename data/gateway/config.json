@@ -1,13 +1,13 @@
 {
-    "cloud" : "mqtt://CLOUD_SERVER",
+    "cloud_mqtt" : "CLOUD_SERVER",
 
-    "bridge" : "mqtt://mqtt",
+    "local_mqtt" : "mqtt",
 
     "clientOption" : {
         "username" : "GATEWAY_ID",
         "password" : "GATEWAY_PW",
         "clientId" : "GATEWAY_ID",
         "clean" : false,
-        "rejectUnauthorized": false
+        "rejectUnauthorized": true
     }
 }

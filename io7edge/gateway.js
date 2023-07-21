@@ -1,3 +1,21 @@
+//
+// This gateway has the following characteristics
+// 1. if cfg.{local_mqtt, cloud_mqtt} have the protocol, then honor them, ie just use them.
+// 2. if environment variable 'NODE_EXTRA_CA_CERTS' or extra_ca variable in config.json is defined,
+//    then the cloud connection will be adjusted to use TLS.
+//      {
+//            "cloud_mqtt" : "iotlab101.io7lab.com",
+//            "local_mqtt" : "mqtt",
+//  =====>    "extra_ca" : "io7lab.pem",
+//            "clientOption" : {
+//                "username" : "gw1",
+//                "password" : "gw1",
+//                "clientId" : "gw1",
+//                "clean" : false,
+//                "rejectUnauthorized": true
+//            } 
+//        }
+//
 const mqtt = require('mqtt');
 const fs = require('fs');
 
@@ -13,8 +31,28 @@ clientOption.will = {
     retain: true
 }
 
-const cloud  = mqtt.connect(cfg.cloud, clientOption);
-const bridge  = mqtt.connect(cfg.bridge);
+let local_mqtt = cfg.local_mqtt;
+let cloud_mqtt = cfg.cloud_mqtt;
+
+if (!(cfg.local_mqtt.match(/[mqts]*:\/\//))) {
+    local_mqtt = 'mqtt://' + cfg.local_mqtt;
+}
+if (!(cfg.cloud_mqtt.match(/[mqts]*:\/\//))) {
+    cloud_mqtt = 'mqtt://' + cfg.cloud_mqtt;
+}
+
+if ((cfg.extra_ca !== undefined && fs.existsSync(cfg.extra_ca)) ||
+            process.env.NODE_EXTRA_CA_CERTS !== undefined ) {
+
+    cloud_mqtt = 'mqtts://' + cfg.cloud_mqtt.replace(/[mqts]*:\/\//,'');
+
+    if (process.env.NODE_EXTRA_CA_CERTS === undefined) {
+        clientOption.ca = [fs.readFileSync('io7lab.pem')];
+    }
+}
+
+const cloud  = mqtt.connect(cloud_mqtt, clientOption);
+const bridge  = mqtt.connect(local_mqtt);
 
 let edgeDevices = [];
 
