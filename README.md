@@ -1,6 +1,6 @@
 This is the io7 platform edge server repository. 
 
-It is the the Edge Server for the io7 platform and is built with the io7 gateway capability.
+It is the the Edge Server for the io7 platform(https://github.com/io7lab/io7-platform-cloud) and is built with the io7 gateway capability.
 
 This gateway has the following configuration format.
 
