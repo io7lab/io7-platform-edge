@@ -23,9 +23,8 @@ This gateway has the following configuration format.
 
 # Edge Server Configuration
 The Edge server can be configured as follows.
-1. if cfg.{local_mqtt, cloud_mqtt} have the protocol, then honor them, ie just use them.
-2. if environment variable 'NODE_EXTRA_CA_CERTS' or extra_ca variable in config.json is defined,
-    then the cloud connection will be adjusted to use TLS.
+1. If **local_mqtt** and/or **cloud_mqtt** have the protocol, then the gateway will honor them, ie just use them.
+2. But if environment variable **NODE_EXTRA_CA_CERTS** or **extra_ca** variable is defined in config.json, then the cloud connection will be adjusted to use TLS, ie mqtts.
 
    i.e.
 ```
