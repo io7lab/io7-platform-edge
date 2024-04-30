@@ -26,6 +26,7 @@ cp $dir/../io7edge/package.json ~/data/gateway
 cd ~/data/gateway
 npm i
 
+cd ~
 node $dir/modify-docker-compose.js ~/docker-compose.yml <<EOF
 services.io7edge.command: [ "node", "gateway.js" ]
 services.io7edge.volumes: ./data/gateway:/home/node/app
