@@ -1,5 +1,10 @@
 {
+  "name": "io7edge-gateway",
+  "version": "0.1.0",
   "dependencies": {
     "mqtt": "^4.3.7"
+  },
+  "scripts": {
+    "start": "node gateway.js"
   }
 }

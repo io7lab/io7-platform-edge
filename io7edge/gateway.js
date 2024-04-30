@@ -67,17 +67,17 @@ let sub4cloud = (device) => {
 }
 
 cloud.on('connect', () => {
+    console.log(`connected to cloud ${cloud_mqtt}`);
     cloud.subscribe(`iot3/${gatewayId}/gateway/list`);
     cloud.publish(`iot3/${gatewayId}/evt/connection/fmt/json`, '{"d":{"status":"online"}}', {retain:true});
     cloud.publish(`iot3/${gatewayId}/gateway/query`, '{"d":{"devices":"*"}}');
-console.log('hh');
 });
 
 setTimeout(() => {
     bridge.on('connect', () => {
+        console.log('connected to edge bridge');
         bridge.subscribe(`iot3/+/evt/+/fmt/+`);
         bridge.subscribe(`iot3/+/mgmt/device/meta`);
-console.log('local');
     });
 }, 2);
 
@@ -96,7 +96,6 @@ cloud.on('message', (topic, message) => {
 });
 
 bridge.on('message', (topic, message) => {
-console.log(topic);
     const topic_ = topic.split('/');
     if (edgeDevices.includes(topic_[1])) {
         if (topic_[3] !== 'connection') {

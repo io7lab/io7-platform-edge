@@ -9,9 +9,9 @@ This gateway has the following configuration format.
 **Configuration File - config.json**
 ```
 {
-    "cloud_mqtt" : "CLOUD_SERVER",
+    "cloud_mqtt" : "CLOUD_SERVER",      // io7 IOT Platform Server
 
-    "local_mqtt" : "mqtt",
+    "local_mqtt" : "mqtt",              // io7 IOT Edge Server. 'mqtt' is a docker link, ie host
 
     "clientOption" : {
         "username" : "GATEWAY_ID",
@@ -34,7 +34,7 @@ The Edge server can be configured as follows.
       {
             "cloud_mqtt" : "iotlab101.io7lab.com",
             "local_mqtt" : "mqtt",
-  =====>    "extra_ca" : "io7lab.pem",
+  =====>    "extra_ca" : "ca.pem",
             "clientOption" : {
                 "username" : "gw1",
                 "password" : "gw1",
@@ -60,7 +60,7 @@ The Edge server can be configured as follows.
         "password" : "gw1",
         "clientId" : "gw1",
         "clean" : false,
-        "rejectUnauthorized": false
+        "rejectUnauthorized": true
     }
 }
 ```
@@ -72,14 +72,14 @@ The Edge server can be configured as follows.
 
     "local_mqtt" : "mqtt",
 
-    "extra_ca" : "io7lab.pem",
+    "extra_ca" : "ca.pem",
 
     "clientOption" : {
         "username" : "gw1",
         "password" : "gw1",
         "clientId" : "gw1",
         "clean" : false,
-        "rejectUnauthorized": false
+        "rejectUnauthorized": true
     }
 }
 ```
@@ -90,10 +90,10 @@ The Edge server can be configured as follows.
   io7edge:
     container_name: io7edge
     image: io7lab/io7-edge
-#    environment:
-#      - NODE_EXTRA_CA_CERTS=io7lab.pem
+    environment:                                           // specify the ca file name
+      - NODE_EXTRA_CA_CERTS=ca.pem
     volumes:
-#      - ./data/gateway/io7lab.pem:/home/node/app/io7lab.pem       <=== uncomment this line and adjust the certificate file name
+      - ./data/gateway/ca.pem:/home/node/app/ca.pem        // specify the ca file name
       - ./data/gateway/config.json:/home/node/app/config.json
     links:
       - mqtt

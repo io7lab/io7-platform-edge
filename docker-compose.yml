@@ -12,6 +12,7 @@ services:
     container_name: nodered
     image: nodered/node-red
     environment:
+      - NODE_RED_ENABLE_PROJECTS=true
       - TZ=Asia/Seoul
     volumes:
       - ./data/nodered:/data
@@ -34,10 +35,7 @@ services:
   io7edge:
     container_name: io7edge
     image: io7lab/io7-edge
-#    environment:
-#      - NODE_EXTRA_CA_CERTS=io7lab.pem
     volumes:
-#      - ./data/gateway/io7lab.pem:/home/node/app/io7lab.pem
       - ./data/gateway/config.json:/home/node/app/config.json
     links:
       - mqtt
