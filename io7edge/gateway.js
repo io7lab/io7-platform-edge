@@ -57,7 +57,7 @@ const bridge  = mqtt.connect(local_mqtt);
 let edgeDevices = [];
 
 let sub4cloud = (device) => {
-    console.log('subscribing for ' + device);
+    console.log(`${(new Date()).toLocaleString()} - Subscribing for ${device}`);
     cloud.subscribe(`iot3/${device}/cmd/+/fmt/+`);
     cloud.subscribe(`iot3/${device}/mgmt/initiate/device/reboot`);
     cloud.subscribe(`iot3/${device}/mgmt/device/update`);
@@ -67,7 +67,7 @@ let sub4cloud = (device) => {
 }
 
 cloud.on('connect', () => {
-    console.log(`connected to cloud ${cloud_mqtt}`);
+    console.log(`${(new Date()).toLocaleString()} - Connected to cloud ${cloud_mqtt}`);
     cloud.subscribe(`iot3/${gatewayId}/gateway/list`);
     cloud.publish(`iot3/${gatewayId}/evt/connection/fmt/json`, '{"d":{"status":"online"}}', {retain:true});
     cloud.publish(`iot3/${gatewayId}/gateway/query`, '{"d":{"devices":"*"}}');
@@ -75,7 +75,7 @@ cloud.on('connect', () => {
 
 setTimeout(() => {
     bridge.on('connect', () => {
-        console.log('connected to edge bridge');
+        console.log(`${(new Date()).toLocaleString()} - Connected to edge bridge`);
         bridge.subscribe(`iot3/+/evt/+/fmt/+`);
         bridge.subscribe(`iot3/+/mgmt/device/meta`);
     });

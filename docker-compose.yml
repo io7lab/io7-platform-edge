@@ -35,6 +35,8 @@ services:
   io7edge:
     container_name: io7edge
     image: io7lab/io7-edge
+    environment:
+      - TZ=Asia/Seoul
     volumes:
       - ./data/gateway/config.json:/home/node/app/config.json
     links:
