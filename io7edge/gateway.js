@@ -98,7 +98,9 @@ cloud.on('message', (topic, message) => {
 bridge.on('message', (topic, message) => {
     const topic_ = topic.split('/');
     if (edgeDevices.includes(topic_[1])) {
-        if (topic_[3] !== 'connection') {
+        if (topic_[3] === 'connection') {
+            cloud.publish(topic, message.toString(), { retain: true });
+        } else {
             if (topic_[4] === 'meta') {
                 cloud.publish(topic, message.toString(), { retain: true });
             } else {
