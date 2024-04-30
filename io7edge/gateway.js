@@ -6,7 +6,7 @@
 //      {
 //            "cloud_mqtt" : "iotlab101.io7lab.com",
 //            "local_mqtt" : "mqtt",
-//  =====>    "extra_ca" : "io7lab.pem",
+//  =====>    "extra_ca" : "ca.pem",
 //            "clientOption" : {
 //                "username" : "gw1",
 //                "password" : "gw1",

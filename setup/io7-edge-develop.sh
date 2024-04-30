@@ -28,8 +28,9 @@ npm i
 
 cd ~
 node $dir/modify-docker-compose.js ~/docker-compose.yml <<EOF
-services.io7edge.command: [ "node", "gateway.js" ]
+services.io7edge.command [ "node", "gateway.js" ]
 services.io7edge.volumes: ./data/gateway:/home/node/app
+- services.io7edge.volumes: ./data/gateway/config.json:/home/node/app/config.json
 EOF
 
 cd ~/data/nodered
