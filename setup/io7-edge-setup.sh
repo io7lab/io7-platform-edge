@@ -9,7 +9,7 @@ then
 fi
 
 echo io7 Gateway setup
-echo Enter the MQTT Cloud Address &&read cloud_server
+echo Enter the io7 IOT Platform Cloud Server Address &&read cloud_server
 echo Enter the gateway id && read client_id
 echo Enter the gateway password && read client_pw
 

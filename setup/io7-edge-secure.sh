@@ -1,4 +1,7 @@
 #!/bin/bash
+#
+# This script converts the current io7 edge, so it can connect to secure io7 IOT Platform
+#
 LINE=$*
 myopt() {
     pname=$1

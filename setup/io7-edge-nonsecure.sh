@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# This script reverts the currently protected io7 platform back to non-secure mode
+# This script reverts the currently protected io7 edge back, so it can connect to non-secure io7 IOT Platform
 # all data are kept intact
 dir=$(pwd)/$(dirname $(echo $0))
 
