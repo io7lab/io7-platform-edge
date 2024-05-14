@@ -76,8 +76,8 @@ cloud.on('connect', () => {
 setTimeout(() => {
     bridge.on('connect', () => {
         console.log(`${(new Date()).toLocaleString()} - Connected to edge bridge`);
-        bridge.subscribe(`iot3/+/evt/+/fmt/+`);
-        bridge.subscribe(`iot3/+/mgmt/device/meta`);
+        bridge.subscribe('iot3/+/evt/+/fmt/+');
+        bridge.subscribe('iot3/+/mgmt/device/meta');
     });
 }, 2);
 
@@ -89,6 +89,10 @@ cloud.on('message', (topic, message) => {
         list.forEach(d => {
             edgeDevices.push(d);
             sub4cloud(d);
+            bridge.unsubscribe('iot3/+/evt/+/fmt/+');
+            bridge.unsubscribe('iot3/+/mgmt/device/meta');
+            bridge.subscribe('iot3/+/evt/+/fmt/+');
+            bridge.subscribe('iot3/+/mgmt/device/meta');
         })
     } else {
         bridge.publish(topic, message.toString());
