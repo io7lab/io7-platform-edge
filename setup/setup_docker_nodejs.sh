@@ -66,7 +66,7 @@ else
     echo check the url for the nodejs
 fi
 
-curl -fsSL https://get.docker.com -o get-docker.sh && sh get-docker.sh
+curl -fsSL https://get.docker.com | sh
 id pi 2> /dev/null > /dev/null
 if [ $? -eq 0 ] ; then
     sudo usermod -aG docker pi
@@ -75,6 +75,5 @@ else
 fi
 sudo systemctl restart containerd
 sudo systemctl restart docker.service
-sudo apt install docker-compose -y
 
 echo if you are using the serial port device, you need to enable the serial port
