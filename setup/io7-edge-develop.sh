@@ -41,4 +41,4 @@ sed -i $sedOpt "s/GATEWAY_ID/$client_id/" ~/data/gateway/config.json
 sed -i $sedOpt "s/GATEWAY_PW/$client_pw/" ~/data/gateway/config.json
 
 cd ~
-docker-compose up -d
+docker compose up -d
